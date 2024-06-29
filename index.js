@@ -16,9 +16,8 @@ var cart = [];
 
 function addProducts() {
     var clutter = "";
-
-    products.forEach(function (products, index) {
-        clutter += `<div class="product w-fit rounded-xl p-2 bg-white">
+products.forEach(function (products, index) {
+    clutter += `<div class="product w-fit rounded-xl p-2 bg-white">
                 <div class="image w-[14rem] h-[13rem] bg-zinc-200 rounded-xl overflow-hidden">
                 <img class = "w-full h-full object-cover" src = "${products.image}"/>
                 </div>
@@ -34,16 +33,14 @@ function addProducts() {
                     </div>
                 </div>
             </div>`
-    })
-
-    document.querySelector(".products").innerHTML = clutter;
+})
+document.querySelector(".products").innerHTML = clutter;
 }
-
 function popularProducts() {
     var clutter = "";
     popular.forEach(function (popular) {
         clutter += `<div class="popular bg-white p-2 rounded-2xl flex items-start gap-3 w-[60%] flex-shrink-0">
-                    <div class="w-20 h-20  flex-shrink-0 rounded-2xl border-4 border-white overflow-hidden">
+                    <div class="w-20 h-20 flex-shrink-0 rounded-2xl border-4 border-white overflow-hidden">
                         <img class="w-full h-full object-cover"
                             src="${popular.image}"
                             alt="">
@@ -55,15 +52,15 @@ function popularProducts() {
                     </div>
                 </div>`
     })
-    document.querySelector(".populars").innerHTML=clutter;
+    document.querySelector(".populars").innerHTML = clutter;
 }
 
 function addToCart() {
     document.querySelector(".products").addEventListener("click", function (details) {
-      if (details.target.classList.contains(`add`)) {
-        cart.push(details.target.dataset.index)
-        // console.log(cart)
-      }  
+        if (details.target.classList.contains(`add`) ) {
+            cart.push(products[details.target.dataset.index])
+            // console.log(cart)
+        }
     })
 }
 
@@ -71,7 +68,7 @@ function showCart() {
     document.querySelector(".carticon").addEventListener("click", function () {
         document.querySelector(".cartexpnd").style.display = "block";
         var clutter = "";
-        cart.forEach(function (prod) {
+        cart.forEach(function (prod, index) {
             clutter += `<div class ="flex gap-2 bg-white p-2 round-lg">
                     <div class="w-10 h-10 flex-shrink-0 round-lg overflow-hidden">
                     <img class="w-full h-full object-cover" src = "${prod.image}"/>
@@ -80,13 +77,14 @@ function showCart() {
                         <h3 class="font-semibold">${prod.name}</h3>
                         <h5 class="text-sm font-semibold opacity-80">${prod.price}</h5>
                     </div>
-                </div>`;
+                </div>`
         })
         document.querySelector(".cartexpnd").innerHTML=clutter;
     })
 }
 
 addProducts();
-popularProducts();
+popularProducts()
 addToCart();
-showCart();
+showCart()
+
