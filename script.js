@@ -5,20 +5,18 @@ var products = [
     {name:"Black chair", headline: "plastic black chair", price:"8000", image:"https://images.unsplash.com/photo-1489269637500-aa0e75768394?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNoYWlyfGVufDB8fDB8fHww"},
     {name:"Yellow chair", headline: "Yellow poshing chair", price:"12000", image:"https://images.unsplash.com/photo-1486946255434-2466348c2166?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNoYWlyfGVufDB8fDB8fHww"},
     {name:"Pink chair", headline: "pink chair with poshing", price:"14000", image:"https://plus.unsplash.com/premium_photo-1690971631360-c7b4f08b4f94?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2hhaXJ8ZW58MHx8MHx8fDA%3D"}
-
 ];
 
 var popular = [
     {name:"Black chair", headline: "plastic black chair", price:"8000", image:"https://images.unsplash.com/photo-1489269637500-aa0e75768394?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGNoYWlyfGVufDB8fDB8fHww"},
     {name:"Yellow chair", headline: "Yellow poshing chair", price:"12000", image:"https://images.unsplash.com/photo-1486946255434-2466348c2166?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGNoYWlyfGVufDB8fDB8fHww"},
     {name:"Pink chair", headline: "pink chair with poshing", price:"14000", image:"https://plus.unsplash.com/premium_photo-1690971631360-c7b4f08b4f94?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2hhaXJ8ZW58MHx8MHx8fDA%3D"}
-
 ]
-
+var cart = [];
 
 function addProducts() {
     var clutter = "";
-products.forEach(function (products) {
+products.forEach(function (products, index) {
     clutter += `<div class="product w-fit rounded-xl p-2 bg-white">
                 <div class="image w-[14rem] h-[13rem] bg-zinc-200 rounded-xl overflow-hidden">
                 <img class = "w-full h-full object-cover" src = "${products.image}"/>
@@ -30,16 +28,14 @@ products.forEach(function (products) {
                             <h3 class="font-semibold opacity-20">${products.headline}</h3>
                             <h4 class="font-semibold mt-2">&#x20B9;${products.price}</h4>
                         </div>
-                        <button class="w-10 h-10 rounded-full shader text-yellow-400"><i
-                                class="ri-add-line"></i></button>
+                        <button data-index = ${index} class="add w-10 h-10 rounded-full shader text-yellow-400">
+                        <i data-index = ${index} class="add  ri-add-line"></i></button>
                     </div>
                 </div>
             </div>`
 })
 document.querySelector(".products").innerHTML = clutter;
 }
-
-
 function popularProducts() {
     var clutter = "";
     popular.forEach(function (popular) {
@@ -59,10 +55,19 @@ function popularProducts() {
     document.querySelector(".populars").innerHTML = clutter;
 }
 
-
+function addToCart() {
+    document.querySelector(".products").addEventListener("click", function (details) {
+        if (details.target.classList.contains(`add`) ) {
+            cart.push(products[details.target.dataset.index])
+            console.log(cart)
+        } else {
+            
+        }
+    })
+}
 
 
 addProducts();
 popularProducts()
-
+addToCart();
 
